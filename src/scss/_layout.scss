@@ -1,0 +1,35 @@
+nav {
+	width: 100%;
+	background-color: #AE0000;
+	min-height: 72px;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+
+	p {
+		font-family: 'GT Cinetype';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 22px;
+		line-height: 26px;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		color: #FFFFFF;
+	}
+
+	button {
+		background: rgba(245, 245, 241, 0.2);
+		width: 55px;
+		height: 30px;
+		margin-right: 20px;
+		margin-top: calc(50% - 30px/2);
+		font-family: 'GT Cinetype';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 12px;
+		line-height: 13px;
+		color: #FFFFFF;
+		border: none;
+	}
+}

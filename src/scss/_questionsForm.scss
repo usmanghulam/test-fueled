@@ -1,10 +1,304 @@
+$medium: 768px;
+$small: 425px;
+$ex_small: 320px;
+$theme_color: #AE0000;
+
+@mixin fonts {
+	font-family: 'GT Cinetype';
+	font-style: normal;
+	font-weight: 400;
+	color: #161616;
+}
+
+@mixin disabledBtn {
+	// color: #414141;
+	cursor: not-allowed;
+}
+
+@mixin text_input {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 16px;
+	width: 100%;
+	height: 52px;
+	background: #FFFFFF;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	@include fonts();
+	font-size: 16px;
+	opacity: 0.5;
+	line-height: 125%;
+}
+
+@mixin checkbox_input {
+	width: 18px;
+	height: 18px;
+	position: relative;
+	cursor: pointer;
+
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		top: 0;
+		left: 0;
+		border: 2px solid rgba(0, 0, 0, 0.1);
+		border-radius: 3px;
+		background-color: white;
+	}
+
+	&:checked::after {
+		content: "";
+		display: block;
+		width: 5px;
+		height: 10px;
+		border: solid #414141;
+		border-width: 0 2px 2px 0;
+		-webkit-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+		position: absolute;
+		top: 2px;
+		left: 6px;
+	}
+}
+
+@mixin label {
+	@include fonts();
+	font-size: 12px;
+	line-height: 100%;
+	color: #000000;
+}
+
+.divider {
+	width: 100%;
+	height: 1px;
+	background: #F5F5F1;
+}
+
 .questionsForm {
-    // display: flex;
-    // justify-content: center;
-    .questionContainer {
-        width: 40rem;
-        background-color: #fff;
-        padding: 20px;
-        min-height: 30rem;
-    }
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	padding: 24px;
+
+	.addQuestions,
+	.formSubmitBtn {
+		width: 712px;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding: 8px;
+		gap: 8px;
+		text-transform: uppercase;
+		@include fonts();
+		font-weight: 700;
+		font-size: 12px;
+		line-height: 13px;
+		color: $theme_color;
+		@media screen and (max-width: $small) {
+			width: 100%;
+		}
+	}
+
+	.addQuestions {
+		background: #F5F5F1;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		&:disabled {
+			@include disabledBtn();
+		}
+	}
+
+	.formSubmitBtn {
+		background: #AE0000;
+		color: #FFFFFF;
+		border: none;
+	}
+
+	.questionWrapper {
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 24px;
+		gap: 16px;
+		min-width: 712px;
+		min-height: 289px;
+		background: #FFFFFF;
+		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+
+		@media screen and (max-width: $medium) {
+			min-width: 100%;
+		}
+
+		@media screen and (max-width: $small) {
+			padding: 14px;
+		}
+
+		.question {
+			width: 100%;
+
+			label {
+				@include label();
+			}
+
+			input[type='text'] {
+				@include text_input()
+			}
+		}
+
+		.bottom {
+			display: flex;
+			width: 100%;
+			height: 48px;
+			flex-direction: row;
+			justify-content: space-between;
+			padding: 16px 0px 0px;
+
+			.remaining {
+				@include fonts();
+				font-size: 14px;
+				line-height: 125%;
+				color: #000000;
+				opacity: 0.54;
+				padding: 16px 0px 0px;
+			}
+
+			.icons {
+				display: flex;
+				flex-direction: row;
+				gap: 10px;
+			}
+		}
+
+		.answer {
+			width: 100%;
+
+			.answerLabel {
+				@include label();
+			}
+
+			select {
+				width: 271px;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+				box-sizing: border-box;
+				padding: 16px;
+				gap: 10px;
+				background: #FFFFFF;
+				border: 1px solid rgba(0, 0, 0, 0.1);
+				border-radius: 4px;
+			}
+
+			.shortAnswer {
+				@include text_input();
+				margin-top: 20px;
+				background: rgba(0, 0, 0, 0.04);
+			}
+
+			textarea {
+				@include text_input();
+				margin-top: 20px;
+				height: 92px;
+				background: rgba(0, 0, 0, 0.04);
+			}
+
+			.multipleAnswers {
+				margin-top: 24px;
+
+				.main {
+					width: 271px;
+					display: flex;
+					flex-direction: row;
+					gap: 10px;
+					margin-top: 10px;
+
+					&:first-child {
+						margin-top: 0;
+					}
+
+					.selectors {
+						display: flex;
+						align-items: center;
+
+						input[type='checkbox'] {
+							@include checkbox_input();
+						}
+
+						input[type='radio'] {
+							width: 20px;
+							height: 20px;
+							background-color: #414141;
+						}
+					}
+
+					input[type='text'] {
+						@include text_input();
+						width: 211px;
+						height: 52px;
+					}
+
+					.btn {
+						display: flex;
+						align-items: center;
+
+						button {
+							background: none;
+							border: none;
+							width: 11.93px;
+							height: 11.83px;
+
+							&:hover {
+								cursor: pointer;
+							}
+
+							&:disabled {
+								@include disabledBtn();
+							}
+						}
+					}
+				}
+
+				.addOptionsBtn {
+					width: 271px;
+					margin-top: 10px;
+
+					button {
+						@include fonts();
+						font-weight: 700;
+						font-size: 12px;
+						line-height: 13px;
+						width: 100%;
+						padding: 14px;
+						background: #FFFFFF;
+						text-transform: uppercase;
+						color: $theme_color;
+						border: 1px solid rgba(0, 0, 0, 0.1);
+						cursor: pointer;
+
+						&:disabled {
+							@include disabledBtn();
+						}
+					}
+
+					@media screen and (max-width: $small) {
+						width: 100%;
+
+						button {
+							padding: 24px;
+						}
+					}
+				}
+			}
+		}
+	}
 }

@@ -1,52 +1,29 @@
-import { FieldArray } from 'formik';
 import React from 'react'
-
-const SpecialAnswersField = ({ formikBag, i, type, answerOption }) => {
-	const answersArr =
-		typeof formikBag.values.questions[i].answer === 'string' ? [answerOption] :
-			formikBag.values.questions[i].answer
-	console.log({ answersArr })
-	if (!Array.isArray(answersArr)) return;
-	return (
-		<>
-			<FieldArray
-				name={`questions.${i}.answer`}
-				render={answerHelper => (
-					<>
-						{answersArr.map((ans, j) => (
-							<div key={j}>
-								<input />
-							</div>
-						))}
-						<button
-							type='button'
-							onClick={() => answerHelper.push(answerOption)}
-						>+ ADD Options</button>
-					</>
-				)}
-			/>
-		</>
-	)
-}
+import MultipleAnswersField from './multipleAnswersField';
 
 const AnswerField = ({ formikBag, i, answerOption }) => {
 	const { handleChange, handleBlur, values } = formikBag;
 	const type = values.questions[i].type;
 	const inputProps = {
-		name: `questions.${i}.answer`,
+		name: `questions.${i}.answer.${0}.option`,
 		onChange: handleChange,
 		onBlur: handleBlur,
-		value: Array.isArray(values.questions[i].answer) ? '' : values.questions[i].answer,
+		value: values.questions[i].answer[0].option,
 	}
 	switch (type) {
 		case 'paragraph':
-			return <textarea cols={10} rows={10} {...inputProps} />
+			return <textarea placeholder='Long Answer Text' cols={10} rows={10} {...inputProps} />
 		case 'checkboxes':
 		case 'multipleChoices':
 		case 'dropdown':
-			return <SpecialAnswersField {...{ formikBag, i, type, answerOption }} />
+			return <MultipleAnswersField {...{ formikBag, i, type, answerOption }} />
 		default:
-			return <input type="text" {...inputProps} />
+			return <input
+				className='shortAnswer'
+				placeholder='Short Answer'
+				type="text"
+				{...inputProps}
+			/>
 	}
 }
 

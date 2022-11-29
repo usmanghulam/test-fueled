@@ -1,13 +1,13 @@
-import React, { useContext } from 'react'
-import { Formik, Form, Field, FieldArray } from 'formik';
+import React from 'react'
+import { Formik, Form, FieldArray } from 'formik';
 import QuestionForm from './questionForm';
 
 
-const answerOption = { option: '' }
+const answerOption = { option: '', isTrue: false }
 const formVal = {
 	question: '',
 	type: 'shortAnswer',
-	answer: '' || [answerOption],
+	answer: [answerOption],
 }
 
 const Question = () => {
@@ -20,28 +20,32 @@ const Question = () => {
 				onSubmit={(values) => console.log(values)}
 			>
 				{(formikBag) => {
+					const questions = formikBag.values.questions;
 					return (
 						<Form className='questionsForm'>
-							<div className='questionContainer'>
-								<FieldArray
-									name='questions'
-									render={helper => (
-										<>
-											{formikBag.values.questions.map((_, i) => (
-												<div className='questionWrapper' key={i}>
-													<QuestionForm {...{
-														formikBag,
-														answerOption,
-														i
-													}} />
-												</div>
-											))}
-											<button onClick={() => helper.push(formVal)}>+ ADD Question</button>
-										</>
-									)}
-								/>
-								<button type='submit' className='formSubmitBtn'>Save & Share</button>
-							</div>
+							<FieldArray
+								name='questions'
+								render={helper => (
+									<>
+										{questions.map((_, i) => (
+											<div className='questionWrapper' key={i}>
+												<QuestionForm {...{
+													formikBag,
+													answerOption,
+													helper,
+													i
+												}} />
+											</div>
+										))}
+										<button
+											className='addQuestions'
+											onClick={() => helper.push(formVal)}
+											disabled={questions.length > 1}
+										>+ &nbsp; ADD Question</button>
+									</>
+								)}
+							/>
+							<button type='submit' className='formSubmitBtn'>Save & Share</button>
 						</Form>
 					)
 				}}
