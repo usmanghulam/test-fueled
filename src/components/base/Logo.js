@@ -2,10 +2,9 @@ import * as React from 'react'
 
 const Logo = () => {
 	return <>
-		<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path fillRule="evenodd" clipRule="evenodd" d="M0 48H48V0H0V48Z" fill="#AE0000" />
+		<svg width="23" height="26" viewBox="0 0 23 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M14.033 2.75165L14.032 11.174H13.0508H4.91835H3.94224L3.94131 2.75892L4.91588 1.78544H13.0689L14.033 2.75165ZM21.6531 21.4593V12.6331C21.6531 12.6333 22.095 12.1916 22.095 12.1916V8.31032L19.7782 5.97576H17.4439V6.66666H19.5035L20.831 8.01553L20.1834 8.6608L20.1822 12.1892L20.6148 12.6183V21.0219H18.6725V11.8385L18.0212 11.1808H15.6549V2.08338L13.746 0.174927H4.23558L2.32651 2.08338V24.0098H0.719971V25.623H17.257V24.0098H15.6549V12.235H17.6048V21.4208L18.2564 22.0783H21.0391L21.6531 21.4593Z" fill="#F5F5F1" />
 		</svg>
-
 	</>
 }
 

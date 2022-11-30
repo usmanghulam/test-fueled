@@ -1,10 +1,26 @@
+@import './variables.scss';
+
 nav {
 	width: 100%;
-	background-color: #AE0000;
+	background-color: $theme_color;
 	min-height: 72px;
 	color: #fff;
 	display: flex;
 	justify-content: space-between;
+
+	.logo {
+		width: 48px;
+		height: 48px;
+		font-style: normal;
+		font-weight: 700;
+		font-size: 22px;
+		line-height: 26px;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		margin-left: 20px;
+		margin-top: 10px;
+	}
 
 	p {
 		font-family: 'GT Cinetype';
@@ -31,5 +47,9 @@ nav {
 		line-height: 13px;
 		color: #FFFFFF;
 		border: none;
+
+		@media screen and (max-width: $small) {
+			opacity: 0;
+		}
 	}
 }
